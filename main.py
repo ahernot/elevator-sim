@@ -20,19 +20,23 @@ class Elevator:
         self.movementQueue = list()
 
 
+    # always re-round position
+
     def step(self):
         # compute position after next step
         pass
 
     def moveUp(self):
-        if self.floor < MAX_FLOOR:
-            self.floor += 1
+        # Move up for one timeStep (if possible)
+        if self.position <= MAX_FLOOR - (self.speed * 1):
+            self.position += self.speed
             return True
         return False
 
     def moveDown(self):
-        if self.floor > MIN_FLOOR:
-            self.floor -= 1
+        # Move down for one timeStep (if possible)
+        if self.position >= MIN_FLOOR + (self.speed * 1):
+            self.position -= self.speed
             return True
         return False
 
