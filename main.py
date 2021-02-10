@@ -1,6 +1,9 @@
 # main.py
 # Created by Anatole Hernot on 2021.02.02
 
+
+import math
+
 MIN_FLOOR = 0
 MAX_FLOOR = 10
 
@@ -40,6 +43,27 @@ class Elevator:
             return True
         return False
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # if on floor (not final dest) and same direction: stop
+
+
+
+
+
+
+
     def goTo(self, floor):
         # go to desired floor
         pass
@@ -59,8 +83,46 @@ class Elevator:
 
 
 
+
+
+CURRENT_TIME = 0
+
+def updatePriority(callTuple: tuple):
+    # Unpack list
+    priority, floorRequest, multiplier, timeOfCall = callTuple
+
+    # Compute time delta since call
+    timeSinceCall = CURRENT_TIME - timeOfCall
+
+    # compute priority
+    priority = multiplier * math.exp(priority * timeSinceCall)
+
+    # Pack
+    return (priority, floorRequest, multiplier, timeOfCall)
+
+
+
+callList = []
+for i, callTuple in enumerate(callList):
+    callList[i] = updatePriority(callTuple)
+
+
+
+
 # elevator will go to
 # any floor > 0 will likely wanna go down
 # 0 will go to any floor > 0
 
 # priority based on waiting time as well
+
+
+
+callQueue = list()
+
+callQueue.append( (1, 10) )  # priority, floor
+# priority multiplier, priority, floor
+
+
+# priority multiplier: 1 for outside call, 2 for inside call
+
+# e^(priority * deltaTime) every step
